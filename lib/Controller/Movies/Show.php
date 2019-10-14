@@ -18,11 +18,7 @@ class Show extends Base
 
     protected function action($params)
     {
-        $movies = Movies::query()
-            ->select()
-            ->where('Id', '=', $params['Id'])
-            ->run();
-
+        $movies = Movies::getMoviesByParams($params);
         $this->movie = array_shift($movies);
     }
 

@@ -61,7 +61,9 @@ class Movies extends Base
     public static function getMoviesByParams($params)
     {
         $moviesQuery = Movies::query()->select();
-        if (!empty($params['SearchByMovieName'])) {
+        if(!empty($params['Id'])) {
+            $moviesQuery->where('Id', '=', $params['Id']);
+        } elseif (!empty($params['SearchByMovieName'])) {
             $moviesQuery->where('Name', 'LIKE', '%'.$params['SearchByMovieName'].'%');
         }
         $movies = $moviesQuery
@@ -69,12 +71,14 @@ class Movies extends Base
             ->run();
 
         if (!empty($movies)) {
-            $actors = Actors::query()
-                ->select()
-                ->run();
-
             $moviesActors = MoviesActors::query()
                 ->select()
+                ->where('MoviesId', 'IN', array_column($movies, 'Id'))
+                ->run();
+
+            $actors = Actors::query()
+                ->select()
+                ->where('Id', 'IN', array_column($moviesActors, 'ActorsId'))
                 ->run();
 
             $groupMoviesActors = [];
