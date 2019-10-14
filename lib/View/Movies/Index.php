@@ -21,7 +21,8 @@
         <input 
             class="btn btn-secondary" 
             type="submit" 
-            value="Искать" />
+            value="Искать" 
+        />
     </form>
 </div>
 
@@ -33,16 +34,24 @@
     </tr>
     <?php foreach ($movies as $movie): ?>
         <tr>
-            <td> <?= $this->escape($movie['Name']) ?> </td>
+            <td> 
+                <?= $this->escape($movie['Name']) ?> 
+            </td>
             <td>
                 <?= $this->escape(implode(', ', $movie["Actors"])) ?>
             </td>
             <td>
-                <a class="show-link" href="/movies/<?= $movie['Id'] ?>"><button class="btn btn-light show-link">Показать</button></a>
+                <a class="show-link" href="/movies/<?= $movie['Id'] ?>">
+                    <button class="btn btn-light show-link">Показать</button></a>
 
                 <form action="/movies/<?= $movie['Id'] ?>">
                     <input type='hidden' name="RequestMethod" value="DELETE" />
-                    <input class="btn btn-light" type="submit" onclick="return confirm('Действительно удалить выбранный фильм?')" value="Удалить" />
+                    <input 
+                    class="btn btn-light" 
+                    type="submit" 
+                    onclick="return confirm('Действительно удалить выбранный фильм?')" 
+                    value="Удалить" 
+                    />
                 </form>
             </td>
         </tr>

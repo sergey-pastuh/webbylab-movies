@@ -4,8 +4,17 @@
 	</div>	
 	<hr>
 	<div class="movie-info">
-		<p>Год выпуска: <?=$this->escape($movie['ReleaseYear'])?></p> <br>
-		<p>Формат: <?= $this->escape($movie['Format']) ?> </p> <br>
-		<p>Актёры: <?= $this->escape(implode(', ', $movie["Actors"])) ?> </p> <br>
+		<p>
+			Год выпуска: <?=$this->escape($movie['ReleaseYear'])?>	
+		</p> 
+		<br>
+		<p>
+			Формат: <?= $this->escape($movie['Format']) ?> 
+		</p> 
+		<br>
+		<p>
+			Актёры: <?= $this->escape(implode(', ', $movie["Actors"])) ?> 
+		</p> 
+		<br>
 	</div>
 </div>

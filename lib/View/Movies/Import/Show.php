@@ -5,7 +5,7 @@
             <br/>
             <input class="" type="file" name="ImportFile" />
         </p>
-            <input class="input-import" type="submit" value="Сохранить" />
+            <input class="btn btn-light input-import" type="submit" value="Сохранить" />
         </p>
     </form>
 </div>
