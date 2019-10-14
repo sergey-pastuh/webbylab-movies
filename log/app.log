@@ -1,0 +1,4 @@
+[2019-10-14 21:09:29] Query run PDO error: SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '2015-19-20' for column 'release_year' at row 1
+[2019-10-14 21:09:29] Controller error: SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '2015-19-20' for column 'release_year' at row 1
+[2019-10-14 21:16:03] Query run PDO error: SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '2029' for column 'release_year' at row 1
+[2019-10-14 21:16:03] Controller error: SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '2029' for column 'release_year' at row 1

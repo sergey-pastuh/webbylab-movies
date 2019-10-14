@@ -1,0 +1,21 @@
+CREATE DATABASE IF NOT EXISTS `webbylab` CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE `webbylab`;
+
+CREATE TABLE IF NOT EXISTS `movies` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL DEFAULT '',
+    `format` ENUM ('VHS', 'DVD', 'Blu-Ray') DEFAULT NULL,
+    `release_year` VARCHAR(4) NOT NULL DEFAULT ''
+);
+
+CREATE TABLE IF NOT EXISTS `actors` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL DEFAULT ''
+);
+
+CREATE TABLE IF NOT EXISTS `movies_actors` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `movies_id` INT NOT NULL DEFAULT 0,
+    `actors_id` INT NOT NULL DEFAULT 0
+);
