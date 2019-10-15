@@ -8,9 +8,9 @@ php -S localhost:8080 -t public
 
 # Open "localhost:8080" on your browser
 
-#Project was made using the MVC arhitecture. 
-#Structure:
-#public - contains public files such as images, css and js files.
-#lib - contains main project files including the Model-View-Controller files.
-#config - contains config file.
-#log - contains log file.
+# Project was made using the MVC arhitecture. 
+# Structure:
+# public - contains public files such as images, css and js files.
+# lib - contains main project files including the Model-View-Controller files.
+# config - contains config file.
+# log - contains log file.
