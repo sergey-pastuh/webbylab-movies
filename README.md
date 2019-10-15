@@ -1,3 +1,4 @@
+# Installation instruction:
 # Mysql database setup
 mysql -u[YOUR_USERNAME] -p[YOUR_PASSWORD] < database.sql
 
