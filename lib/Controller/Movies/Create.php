@@ -9,6 +9,12 @@ class Create extends Base
 {
     protected function verifyParams($params)
     {
+        $existedMovies = Movies::getMoviesByParams();
+        if (Movies::isMovieInList($params, $existedMovies)) {
+            $this->errorMessage('Фильм с такими данными уже существует');
+            return;
+        }
+
         if (
             empty($params['Name']) ||
             mb_strlen($params['Name']) < 1 ||

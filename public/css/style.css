@@ -1,6 +1,23 @@
 .full {
     width: 100%;	
 }
+html,
+body,
+.wrapper {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.mainContainer{
+	box-sizing: border-box;
+	padding-bottom: 90px;
+}
+footer {
+	height: 80px;
+}
+
 .gap {
 	height: 30px;
 	width: 100%;
@@ -126,6 +143,7 @@
 	border-top: 1px solid #DDDDDD;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	height: 100%;
 }
 .footer-bottom p.pull-left {
 	padding-top: 6px;

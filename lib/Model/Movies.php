@@ -58,7 +58,7 @@ class Movies extends Base
         return $this->releaseYear;
     }
 
-    public static function getMoviesByParams($params)
+    public static function getMoviesByParams($params = [])
     {
         $moviesQuery = Movies::query()->select();
         if(!empty($params['Id'])) {
@@ -78,7 +78,7 @@ class Movies extends Base
 
             $actors = Actors::query()
                 ->select()
-                ->where('Id', 'IN', array_column($moviesActors, 'ActorsId'))
+                ->where('Id', 'IN', array_unique(array_column($moviesActors, 'ActorsId')))
                 ->run();
 
             $groupMoviesActors = [];
@@ -102,7 +102,12 @@ class Movies extends Base
                 foreach ($movies as $movieId => $movie) {
                     $skipMovie = true;
                     foreach ($movie['Actors'] as $actorName) {
-                        if (strpos($actorName, $params['SearchByActorName']) !== false) {
+                        if (
+                            strpos(
+                                mb_strtolower($actorName), 
+                                mb_strtolower($params['SearchByActorName'])
+                            ) !== false
+                        ) {
                             $skipMovie = false;
                             break;
                         }
@@ -117,14 +122,27 @@ class Movies extends Base
         return $movies;
     }
 
+    public static function isMovieInList($movie, $moviesList) 
+    {
+        sort($movie['Actors']);
+        foreach ($moviesList as $existedMovie) {
+            sort($existedMovie['Actors']);
+            unset($existedMovie['Id']);
+            if (json_encode($movie) == json_encode($existedMovie)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static function createMovieFromParams($params)
     {
         $movie = new Movies();
-        $movie
-            ->setName($params['Name'])
-            ->setFormat($params['Format'])
-            ->setReleaseYear($params['ReleaseYear'])
-            ->save();
+        $movie->setName($params['Name'])
+              ->setFormat($params['Format'])
+              ->setReleaseYear($params['ReleaseYear'])
+              ->save();
 
         $actors = array_unique($params['Actors']);
         $existedActors = Actors::query()

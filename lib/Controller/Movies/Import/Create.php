@@ -100,14 +100,29 @@ class Create extends Base
             }
         }
 
+        if (empty($movies)) {
+            $this->errorMessage('Файл не содержит корректно заданых фильмов');
+            return;
+        } 
+
+        $existedMovies = Movies::getMoviesByParams();
+        $skippedMoviesCount = 0;
         foreach ($movies as $movie) {
-            Movies::createMovieFromParams($movie);
+            if (Movies::isMovieInList($movie, $existedMovies)) {
+                $skippedMoviesCount++;
+            } else {
+                Movies::createMovieFromParams($movie);
+                $existedMovies[] = $movie;
+            }
         }
 
-        if (!count($movies)) {
-            $this->errorMessage('Файл не содержит корректно заданых фильмов');
-        } else {
-            $this->successMessage(count($movies).' фильмов успешно добавлено');
+        if ($skippedMoviesCount) {
+            $this->errorMessage($skippedMoviesCount. ' фильмов пропущено - фильмы с такими данными уже существуют');
+        }
+
+        $addedMoviesCount = count($movies) - $skippedMoviesCount;
+        if ($addedMoviesCount) {
+            $this->successMessage($addedMoviesCount.' фильмов успешно добавлено');
         }
     }
 
